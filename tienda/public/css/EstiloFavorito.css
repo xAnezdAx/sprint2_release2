@@ -1,0 +1,57 @@
+header {
+	background-color: #ca9dce;
+	color: #5e0c3e;
+	padding: 6px;
+	font-size: 20px;
+}
+.buscador { 
+    text-align: right;
+}
+.buscador input[type="text"] { 
+	margin-right: 100px;
+	
+}
+body { 
+	font-family:  'Arial Narrow Bold', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+.opcion { 
+	margin-bottom: 40px; 
+	display: inline-block; 
+	padding: 5px; 
+	border: 2px solid rgb(110, 6, 124); 
+}
+.opcion1 { 
+	margin-right: 800px;
+	margin-bottom: 40px; 
+	display: inline-block; 
+	padding: 5px; 
+	border: 2px solid rgb(110, 6, 124); 
+}
+
+/*BODY*/
+.container-titulo { 
+    width: 100%;
+	margin-bottom: 40px; 
+	padding: 5px; 
+	border: 2px solid rgb(242, 231, 245); 
+	text-align: center;
+}
+.container {   
+    width: 200%;
+	margin-bottom: 40px; 
+	padding: 10px; 
+	border: 2px solid rgb(220, 145, 235); 
+	text-align: center;
+}
+.row { 
+	margin-right: 800px;
+    margin: 0 auto;
+    width: 90%;
+	margin-bottom: 40px; 
+	padding: 5px; 
+	border: 2px solid rgb(218, 158, 195); 
+	text-align: center;
+	
+}

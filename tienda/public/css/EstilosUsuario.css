@@ -1,0 +1,50 @@
+header{
+    background-color: #ca9dce;;
+    color: #5e0c3e;
+	padding: 6px;
+	font-size: 20px;
+}
+
+.buscador{
+    text-align: right;
+}
+
+.buscador input[type="text"]{
+    margin-right: 100px;
+}
+
+body { 
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.opcion { 
+	margin-bottom: 40px; 
+	display: inline-block; 
+	padding: 5px; 
+	border: 2px solid rgb(139, 71, 148); 
+}
+.opcion1 { 
+	margin-right: 800px;
+	margin-bottom: 40px; 
+	display: inline-block; 
+	padding: 5px; 
+	border: 2px solid rgb(139, 71, 148); 
+}
+
+.perfil{
+	margin: 0 auto;
+    width: 30%;
+	
+}
+.Perfil1{
+	display: flex;
+	align-items: center;
+}
+.Perfil-usuario1{
+	margin-right: 10px;
+}
+input{
+	margin-bottom: 15px;
+}

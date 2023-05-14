@@ -1,0 +1,487 @@
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 60px;
+    background: rgb(241, 239, 239);
+    box-shadow: 0 5px 15px rgb(54, 30, 66);
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+
+#navbar li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    transition: 0.3s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active {
+    color: rgb(195, 127, 230);
+}
+
+#navbar li a.active::after,
+#navbar li a.hover::after {
+    content: "";
+    width: 30%;
+    height: 2px;
+    background: rgb(195, 127, 230);
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+#mobile {
+    display: none;
+    align-items: center;
+}
+
+#close {
+    display: none;
+}
+
+#headerp {
+    background-image: url('../img/banner01.jpg');
+    opacity: 90%;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
+}
+
+#headerp h2,
+#headerp p,
+#headerp h3 {
+    color: rgb(54, 30, 66);
+}
+
+#prodetails {
+    display: flex;
+    margin-top: 20px;
+}
+
+#prodetails .single-pro-image {
+    width: 40%;
+    margin-right: 50px;
+}
+
+.small-img-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+}
+
+#prodetails .single-pro-details {
+    width: 900px;
+    padding-top: 30px;
+}
+
+#prodetails .single-pro-details h4 {
+    padding: 40px 0 20px 0;
+}
+
+#prodetails .single-pro-details h2 {
+    font-size: 26px;
+}
+
+#prodetails .single-pro-details input {
+    width: 50px;
+    height: 47px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+#prodetails .single-pro-details input:focus {
+    outline: none;
+}
+
+#prodetails .single-pro-details span {
+    line-height: 20px;
+}
+
+.section-p1 {
+    padding: 40px 80px;
+}
+
+
+#pagination {
+    text-align: center;
+}
+
+#pagination a {
+    text-decoration: none;
+    background-color: rgb(54, 30, 66);
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: azure;
+    font-weight: 600;
+}
+
+#pagination a i {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#producto1 {
+    text-align: center;
+}
+
+#producto1 .pro-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+
+#producto1 .pro {
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid rgb(149, 113, 167);
+    border-radius: 20px;
+    box-shadow: 20px 20px 30px rgb(192, 180, 247);
+    margin: 15px 0;
+    transition: 0.3s ease;
+}
+
+#producto1 .pro:hover {
+    box-shadow: 20px 20px 30px rgb(205, 217, 247);
+
+}
+
+#producto1 .pro img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+#producto1 .pro .des {
+    text-align: start;
+    padding: 10px 0;
+}
+
+#producto1 .pro .des span {
+    color: rgb(3, 3, 3);
+    font-size: 12px;
+}
+
+#producto1 .pro .des h5 {
+    padding-top: 7px;
+    color: rgb(122, 58, 134);
+    font-size: 14px;
+}
+
+#producto1 .pro .des i {
+    font-size: 12px;
+    color: yellow;
+}
+
+#producto1 .pro .des h4 {
+    padding-top: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(16, 87, 16);
+}
+
+
+.contenedorComentarios {
+    background-color: rgb(241, 239, 239);
+    width: auto;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.contenedor-2 {
+    width: auto;
+    height: auto;
+    background-color: rgb(213, 195, 223);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 30px 20px 30px 20px;
+    gap: 20px;
+    text-transform: capitalize;
+    border-radius: 20px;
+}
+
+/* vista de como se vera cuando agregen un comentario */
+.comentario {
+    background-color: rgb(213, 195, 223);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 0 20px;
+    border-radius: 20px;
+    color: black;
+}
+
+.contenedor-agg-com {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.imagen-usuario {
+    width: 50px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#imagen-usuario .img {
+    width: 50px;
+}
+
+.input-com {
+    width: 500px;
+    height: 100px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 5px;
+}
+
+#nuevoComentario {
+    outline: none;
+    border: 0;
+    width: 100%;
+    height: 50px;
+    padding: 0px 10px 0px 10px;
+    font-size: 15px;
+    background-color: transparent;
+    /* color: pink; */
+    border-bottom: 2px solid rgb(54, 30, 66);
+    transition-duration: 200ms;
+}
+
+#nuevoComentaio::placeholder {
+    color: black;
+}
+
+#nuevoComentario:focus {
+    border-bottom: 2px solid pink;
+}
+
+.btn-agg {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 5px 0px 0px;
+}
+
+.close {
+    font-size: 12px;
+    position: absolute;
+    right: 150px;
+    width: 20px;
+    z-index: 20;
+    transition-delay: 200ms;
+    display: block;
+    cursor: pointer;
+    color: rgb(20, 19, 19);
+}
+
+.comentario-card h3,
+.comentario-card p {
+    margin-bottom: 1rem;
+}
+
+.comen-footer {
+    display: flex;
+    font-size: .85rem;
+    opacity: 0.6;
+    gap: 30px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* va hasta aca */
+footer {
+    background-color: rgb(241, 239, 239);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+footer col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 25px;
+
+}
+
+footer .logo {
+    margin-bottom: 30px;
+}
+
+footer h4 {
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+footer p {
+    font-size: 13px;
+    margin: 0 0 8px 0;
+}
+
+footer a {
+    font-size: 13px;
+    text-decoration: none;
+    color: rgb(54, 30, 66);
+    margin: 10px;
+}
+
+footer .follow {
+    margin-top: 20px;
+}
+
+footer .follow i {
+    color: black;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+footer .install .row img {
+    border: 1px solid rgb(109, 52, 121);
+    border-radius: 6px;
+}
+
+footer .install img {
+    margin: 10px 0 15px 0;
+}
+
+footer .follow i:hover,
+footer a:hover {
+    color: blueviolet;
+}
+
+footer .copy {
+    width: 100%;
+    text-align: center;
+}
+
+/* Hace vista responsive */
+@media (max-width:799px) {
+    .section-p1 {
+        padding: 40px 40px;
+    }
+
+    #navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100vh;
+        width: 300px;
+        background-color: beige;
+        box-shadow: 00 40px 60px pink;
+        padding: 80px 0 0 10px;
+        transition: 0.3s;
+    }
+
+    #navbar.active {
+        right: 0px;
+    }
+
+    #navbar li {
+        margin-bottom: 30px;
+    }
+
+    #mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    #mobile i {
+        color: grey;
+        font-size: 24px;
+        padding-left: 20px;
+    }
+
+    #close {
+        display: initial;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        color: black;
+        font-size: 24px;
+    }
+
+    #carrito {
+        display: none;
+    }
+
+    #headerp {
+        height: 25vh;
+        padding: 0 80px;
+        background-position: top 30% right 30%;
+    }
+
+
+    #producto1 .pro-container {
+        justify-content: center;
+    }
+
+    #producto1 .pro {
+        margin: 15px;
+    }
+
+    footer .copy {
+        text-align: start;
+    }
+
+    #prodetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #prodetails .single-pro-image {
+        width: auto;
+        margin-right: 0px;
+    }
+
+    #prodetails .single-pro-details {
+        width: auto;
+    }
+
+}

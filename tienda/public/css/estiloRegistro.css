@@ -1,0 +1,46 @@
+:root {
+    --bodyBg: rgb(241, 239, 239);
+}
+
+body {
+    background-color: var(--bodyBg);
+}
+
+main {
+    position: relative;
+    width: 1000px;
+    height: 550px;
+    top: 5vh;
+}
+
+form {
+    width: 330px;
+    margin: auto !important;
+}
+
+img {
+    height: 550px;
+    width: 100%;
+}
+
+.fa-xmark {
+    position: absolute;
+    top: 25px;
+}
+
+.fa-xmark:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.fa-circle-user,
+.fa-user,
+.fa-key,
+.fa-envelope {
+    padding: 0.5rem;
+}
+
+label[for="recuerdame"]:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

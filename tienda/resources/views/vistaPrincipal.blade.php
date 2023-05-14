@@ -20,11 +20,18 @@
             <ul id="navbar">
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
+                @can('artistasAdmin')
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
+                @endcan
+                
                 <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
-                <li id="perfil"><a href="perfil"><i class="fa-regular fa-user"></i> </a></li>
+                @auth
+                <li id="perfil"><a href="perfil"><i class="fa-regular fa-user"></i> {{ Auth::user()->name }}</a></li>
+                @else
+                <li id="perfil"><a href="{{ route('login') }}"><i class="fa-regular fa-user"></i> Login</a></li>
+                @endauth
                 <li id="carrito"><a href="Carrito.html"><i class="fa-solid fa-cart-shopping"></i> </a></li>
                 <a href="#" id="close"><i class="fa-solid fa-circle-xmark"></i></a>
             </ul>
@@ -171,7 +178,8 @@
             <p>Copyrigth</p>
         </div>
     </footer>
-    <script src="../javaScript/scriptVistaPrincipal.js"></script>
+
+    <script src="{{ asset('javaScript/scriptVistaPrincipal.js') }}"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
 </body>

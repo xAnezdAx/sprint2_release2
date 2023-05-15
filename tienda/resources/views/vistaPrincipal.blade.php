@@ -13,7 +13,7 @@
 <body>
     <!-- Barra de navegación -->
     <section id="header">
-        <a href="#"><img src="../imagenes/logo001.jpg" class="logo" alt=""></a>
+        <a href="{{route('inicio.index')}}"><img src="../imagenes/logo001.jpg" class="logo" alt=""></a>
         <input type="text" placeholder="search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
@@ -34,7 +34,7 @@
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
-                        <a class="dropdown-item" href="">Perfil</a>                      
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>

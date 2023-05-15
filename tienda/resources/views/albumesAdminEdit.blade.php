@@ -15,12 +15,12 @@
 
     <!-- Barra de navegación -->
     <section id="header">
-        <a href="#"><img src="{{ asset( 'imagenes/logo001.jpg' ) }}" class="logo" alt=""></a>
+        <a href="{{route('inicio.index')}}"><img src="{{ asset( 'imagenes/logo001.jpg' ) }}" class="logo" alt=""></a>
         <input type="text" placeholder="search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
-                <li><a href="inicio"> Inicio</a></li>
+                <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
                 <li><a href="ofertas"> Ofertas</a></li>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/EstilosArtistaAdmin.css">
-    <title>Carrito de compras</title>
+    <link rel="stylesheet" href="{{ asset('css/EstilosPerfil.css') }}">
+    <title>Perfil</title>
 </head>
 
 <body>
@@ -36,58 +36,26 @@
         </div>
     </section>
 
-    <div class=" my-5 animated-background">
-
-        <!-- formulario -->
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form action="{{ route('artistasAdmin.store') }}" method="POST" onsubmit="return validateForm();" class="p-4 bg-light rounded shadow">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" name="name" id="name" class="form-control" maxlength="255">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
-                            <div id="description-counter" class="text-muted mt-2"></div>
-                        </div>
-
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary mt-4">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- tarjetas -->
-        <div class="container my-5">
-            <div class="row">
-                @foreach ($art as $artista)
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+    <div class="">
+        <div class="container ">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="card animated-background">
+                        <div class="card-header">Perfil de Usuario</div>
                         <div class="card-body">
-                            <h5 class="card-title">{{$artista->nombre}}</h5>
-                            <p class="card-text">{{$artista->descripcion}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{route('artistasAdmin.edit', $artista->id)}}" class="btn btn-primary">Editar</a>
-                                <form action="{{route('artistasAdmin.destroy', $artista->id)}}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </div>
+                            <h5 class="card-title"><strong>Datos de</strong> {{ $usuario->name }}</h5>
+                            <p class="card-text"><strong>Email:</strong> {{ $usuario->email }}</p>
+                            <p class="card-text"><strong>Rol: </strong>{{ $rol->name }}</p>
+                            <p class="card-text"><strong>Fecha de Creación:</strong> {{ $usuario->created_at }}</p>
+                            <a href="{{route('perfil.edit', $usuario->id)}}" class="btn btn-primary">Editar</a>
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
-
     </div>
+    
+
 
     <!-- pie de pagina -->
     <footer class="section-p1">
@@ -126,9 +94,9 @@
             <p>Copyrigth</p>
         </div>
     </footer>
-</body>
 
-<script src="{{ asset('javaScript/scriptArtistas.js') }}"></script>
+</body>
+<script src="{{ asset('javaScript/scriptPerfil.js') }}"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
 

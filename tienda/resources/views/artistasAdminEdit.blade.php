@@ -16,7 +16,7 @@
 <body>
     <!-- Barra de navegación -->
     <section id="header">
-        <a href="{{route('inicio.index')}}"><img src="{{ asset( 'imagenes/logo001.jpg' ) }}" class="logo" alt=""></a>
+        <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
         <input type="text" placeholder="search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
@@ -26,9 +26,27 @@
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
                 <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
-                <li id="favorito"> <a href="favoritos"> <i class="fa-solid fa-heart"> </i> </a></li>
-                <li id="perfil"> <a href="perfil"> <i class="fa-regular fa-user"> </i> </a></li>
-                <li id="carrito"> <a href="Carrito.html"> <i class="fa-solid fa-cart-shopping"> </i> </a></li>
+                <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
+                <!-- estado de la autenticacion -->
+                @auth
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+                @else
+                <li id="perfil"><a href="{{ route('login') }}"><i class="fa-regular fa-user"></i> Login</a></li>
+                @endauth
+                <li id="carrito"><a href="Carrito.html"><i class="fa-solid fa-cart-shopping"></i> </a></li>
                 <a href="#" id="close"><i class="fa-solid fa-circle-xmark"></i></a>
             </ul>
         </div>

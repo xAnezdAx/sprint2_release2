@@ -14,5 +14,11 @@ class UserTableSeeder extends Seeder
             'email' => 'jullopezm@unal.edu.co',
             'password' => bcrypt('admin123'),
         ])->assignRole('admin');
+        User::create([
+            'name' => 'juana',
+            'email' => 'juana@unal.edu.co',
+            'password' => bcrypt('admin123'),
+        ])->assignRole('user');
+        
     }
 }

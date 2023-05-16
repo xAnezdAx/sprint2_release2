@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Albumes;
 use Illuminate\Http\Request;
+use App\Models\Albumes;
 use App\Models\Artistas;
 
 class AlbumesAdminController extends Controller

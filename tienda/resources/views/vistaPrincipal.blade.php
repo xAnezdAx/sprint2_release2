@@ -14,7 +14,10 @@
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
@@ -30,8 +33,8 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
-                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -193,6 +196,7 @@
     <script src="{{ asset('javaScript/scriptVistaPrincipal.js') }}"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
 </body>
 
 </html>

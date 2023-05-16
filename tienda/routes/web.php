@@ -13,6 +13,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/artistasAdmin', 'App\Http\Controllers\ArtistasAdminController');
     Route::resource('/albumesAdmin', 'App\Http\Controllers\AlbumesAdminController');
     Route::resource('/perfil', 'App\Http\Controllers\UserController');
+    Route::resource('/AllUser', 'App\Http\Controllers\AllUserController');
 });
 
 Auth::routes();

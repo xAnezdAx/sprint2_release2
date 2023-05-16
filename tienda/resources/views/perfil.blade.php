@@ -22,6 +22,9 @@
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
+                @can('roles')
+                <li><a href="{{route('AllUser.index')}}"> Administrar </a></li>
+                @endcan
                 <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
@@ -31,8 +34,8 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
-                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -72,7 +75,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!-- pie de pagina -->

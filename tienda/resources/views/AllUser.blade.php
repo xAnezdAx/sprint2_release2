@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/EstilosAlbumesAdmin.css">
-    <title>Administracion albumes</title>
+    <link rel="stylesheet" href="{{ asset('css/EstilosAllUser.css') }}">
+    <title>Administracion Usuarios</title>
 </head>
 
 <body>
@@ -54,78 +54,10 @@
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
-    
     <div class=" my-5 animated-background">
 
         <!-- Formulario -->
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form action="{{ route('albumesAdmin.store') }}" method="POST" onsubmit="return validateForm();" class="p-4 bg-light rounded shadow">
-                        @csrf
-                        <div class="form-group">
-                            <label for="id_artista">Artista</label>
-                            <select name="id_artista" id="id_artista" class="form-control">
-                                @foreach($artistas as $artista)
-                                <option value="{{ $artista->id }}">{{ $artista->nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="titulo">Título</label>
-                            <input type="text" name="titulo" id="titulo" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="precio">Precio</label>
-                            <input type="text" name="precio" id="precio" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <div class="custom-file">
-                                <input type="file" name="foto" id="foto" class="custom-file-input" accept="image/*">
-                                <label class="custom-file-label" for="foto">Seleccionar archivo</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <!-- tener cuidado con el id y el name -->
-                            <textarea name="descripcion" id="description" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
-                            <div id="description-counter" class="text-muted mt-2"></div>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary mt-4">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <!-- tarjetas -->
-        <div class="container mt-5">
-            <div class="row">
-                @foreach ($albu as $albume)
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('imagenes/' . $albume->foto) }}" class="card-img-top" alt="{{$albume->foto}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$albume->titulo}}</h5>
-                            <p class="card-text">{{$albume->descripcion}}</p>
-                            <p class="card-text">Artista: {{$albume->nombre}}</p>
-                            <p class="card-text">Precio: {{$albume->precio}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{route('albumesAdmin.edit', $albume->id)}}" class="btn btn-primary">Editar</a>
-                                <form action="{{route('albumesAdmin.destroy', $albume->id)}}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
 
     </div>
     <!-- pie de pagina -->
@@ -168,11 +100,9 @@
 </body>
 
 <script src="{{ asset('javaScript/jquery.min.js') }}"></script>
-<script src="{{ asset('javaScript/scriptAlbumes.js') }}"></script>
+<script src="{{ asset('javaScript/AllUser.js') }}"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
-
-
 </body>
 
 </html>

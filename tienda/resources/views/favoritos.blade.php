@@ -36,6 +36,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
+                        @can('administrador')
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        @elsecan('cliente')
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        @endcan
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -73,7 +78,7 @@
                             <strong>Descripción:</strong> {{ $album->descripcion }}<br>
                             <strong>Artista:</strong> {{ $album->nombre }}<br>
                             <strong>Precio:</strong> {{ $album->precio }} <br>
-                            <form action="{{ route('favoritos.destroy', $lista->) }}" method="POST" class="d-inline">
+                            <form action="{{ route('favoritos.destroy', $lista->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

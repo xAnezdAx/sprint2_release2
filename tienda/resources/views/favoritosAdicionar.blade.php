@@ -36,6 +36,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
+                        @can('administrador')
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        @elsecan('cliente')
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        @endcan
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -72,6 +77,7 @@
                             <form action="{{ route('favoritos.store') }}" method="POST">
                                 @csrf
                                 <div class="d-flex justify-content-between align-items-center">
+                                    <input type="hidden" name="id_album" value="{{ $albume->id }}">
                                     <label for="lista_desplegable">Selecciona una lista:</label>
                                     <select name="lista_desplegable" id="lista_desplegable">
                                         @foreach ($favoritos as $favorito)

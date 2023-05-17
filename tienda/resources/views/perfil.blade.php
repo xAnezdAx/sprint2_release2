@@ -25,6 +25,11 @@
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
+                @can('administrador')
+                <li><a href="{{route('AllUser.index')}}"> Administrar </a></li>
+                @elsecan('cliente')
+                <li><a href="{{route('favoritos.index')}}"> Mis favoritos </a></li>
+                @endcan
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -35,6 +40,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
+                        @can('administrador')
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        @elsecan('cliente')
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        @endcan
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>

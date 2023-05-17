@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoritosController extends Controller
 {
-    public $variableGlobal;
+    //public $variableGlobal;
     public function index()
     {
         $favoritos = favoritos::where('id_usuario', Auth::user()->id)->get();
@@ -34,7 +34,7 @@ class FavoritosController extends Controller
     public function store(Request $request)
     {
         $lista = new lista_favoritos();
-        $lista->id_album = 4;
+        $lista->id_album = $request->id_album;
         $lista->id_favoritos = $request->lista_desplegable;
         $lista->save();
         return redirect()->route('inicio.index');
@@ -48,7 +48,7 @@ class FavoritosController extends Controller
 
     public function edit($id)
     {
-        $this->variableGlobal = $id;
+        //$this->variableGlobal = $id;
         $albume = Albumes::select('albumes.*', 'artistas.nombre')
             ->join('artistas', 'albumes.id_artista', '=', 'artistas.id')
             ->where('albumes.id', $id)

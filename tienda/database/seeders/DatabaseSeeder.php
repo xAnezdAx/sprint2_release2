@@ -2,17 +2,21 @@
 
 namespace Database\Seeders;
 
+use App\Models\Albumes;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+
     public function run()
-    {
-        // \App\Models\User::factory(10)->create();
+    {        
+        $this->call(ArtistasTableSeeder::class);
+        $this->call(AlbumesTableSeeder::class);
+        
+        $this->call(RolTableSeeder::class);
+        $this->call(UserTableSeeder::class);
+
+        $this->call(FavoritosTableSeeder::class);
+        $this->call(ListaFavoritosTableSeeder::class);
     }
 }

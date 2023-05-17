@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Models\Albumes;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Albumes;
 
 class AlbumesTableSeeder extends Seeder
 {
@@ -43,13 +44,13 @@ class AlbumesTableSeeder extends Seeder
             'El primer álbum de estudio de Pearl Jam.'
         ];
         
-        // Crear 10 álbumes aleatorios con datos reales
+        // Crear 10 álbumes aleatorios
         for ($i = 1; $i <= 10; $i++) {
             $id_artista = $artistasIds[array_rand($artistasIds)];
             $titulo = $titulos[array_rand($titulos)];
             $descripcion = $descripciones[array_rand($descripciones)];
             $precio = rand(10, 50) . '.' . rand(0, 99);
-            $foto = 'nombre-de-la-imagen.jpg'; // Reemplazar con el nombre real de la imagen
+            $foto = 'nombre-de-la-imagen.jpg';
             
             DB::table('albumes')->insert([
                 'id_artista' => $id_artista,

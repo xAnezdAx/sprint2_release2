@@ -15,19 +15,44 @@
 
     <!-- Barra de navegación -->
     <section id="header">
-        <a href="#"><img src="{{ asset( 'imagenes/logo001.jpg' ) }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
-                <li><a href="inicio"> Inicio</a></li>
+                <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
-                <li id="favorito"> <a href="favoritos"> <i class="fa-solid fa-heart"> </i> </a></li>
-                <li id="perfil"> <a href="perfil"> <i class="fa-regular fa-user"> </i> </a></li>
-                <li id="carrito"> <a href="Carrito.html"> <i class="fa-solid fa-cart-shopping"> </i> </a></li>
+                <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
+                <!-- estado de la autenticacion -->
+                @auth
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
+                        @can('administrador')
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        @elsecan('cliente')
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        @endcan
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+                @else
+                <li id="perfil"><a href="{{ route('login') }}"><i class="fa-regular fa-user"></i> Login</a></li>
+                @endauth
+                <li id="carrito"><a href="Carrito.html"><i class="fa-solid fa-cart-shopping"></i> </a></li>
                 <a href="#" id="close"><i class="fa-solid fa-circle-xmark"></i></a>
             </ul>
         </div>
@@ -36,10 +61,11 @@
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
-    
+
     <div class=" my-5 animated-background">
 
         <!-- Formulario -->
+        @can('administrador')
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -81,6 +107,7 @@
                 </div>
             </div>
         </div>
+        @endcan
 
         <!-- tarjetas -->
         <div class="container mt-5">
@@ -95,12 +122,18 @@
                             <p class="card-text">Artista: {{$albume->nombre}}</p>
                             <p class="card-text">Precio: {{$albume->precio}}</p>
                             <div class="d-flex justify-content-between align-items-center">
+                                @can('administrador')
                                 <a href="{{route('albumesAdmin.edit', $albume->id)}}" class="btn btn-primary">Editar</a>
                                 <form action="{{route('albumesAdmin.destroy', $albume->id)}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
+                                @elsecan('cliente')
+                                <a href="{{route('favoritos.edit', $albume->id)}}" class="btn btn-primary">Añadir a favoritos</a>
+                                @else
+                                <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -153,6 +186,8 @@
 <script src="{{ asset('javaScript/scriptAlbumes.js') }}"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

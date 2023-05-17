@@ -8,21 +8,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/EstilosArtistaAdmin.css">
-    <title>Carrito de compras</title>
+    <title>Artistas</title>
 </head>
 
 <body>
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -31,8 +33,8 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
-                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -55,8 +57,8 @@
     </section>
 
     <div class=" my-5 animated-background">
-
         <!-- formulario -->
+        @can('administrador')
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -79,6 +81,7 @@
                 </div>
             </div>
         </div>
+        @endcan
 
 
         <!-- tarjetas -->
@@ -91,12 +94,18 @@
                             <h5 class="card-title">{{$artista->nombre}}</h5>
                             <p class="card-text">{{$artista->descripcion}}</p>
                             <div class="d-flex justify-content-between align-items-center">
+                                @can('administrador')
                                 <a href="{{route('artistasAdmin.edit', $artista->id)}}" class="btn btn-primary">Editar</a>
                                 <form action="{{route('artistasAdmin.destroy', $artista->id)}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
+                                @elsecan('cliente')
+                                <a href="#" class="btn btn-primary">Añadir a favoritos</a>
+                                @else
+                                <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
+                                @endcan
                             </div>
                         </div>
                     </div>

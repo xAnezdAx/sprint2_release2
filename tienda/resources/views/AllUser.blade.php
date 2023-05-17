@@ -16,14 +16,16 @@
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -32,8 +34,8 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  
-                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>                      
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -54,10 +56,54 @@
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
+
+    <!-- Contenido -->
     <div class=" my-5 animated-background">
-
         <!-- Formulario -->
+        <!-- usamos can para verificar que el usuario puede administrar aunque conozca la ruta-->
+        @can('administrador')
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                
+                                <td><!-- composer require laravelcollective/html-->
+                                    {!! Form::model($user, ['route' => ['AllUser.update', $user], 'method' => 'put']) !!}
+                                    @foreach ($roles as $role)
+                                    <label><!-- null si no queremos tener marcas por defecto-->
+                                        {!! Form::checkbox('roles[]', $role->id, null, ['class'=>'mr-1']) !!}
+                                        {{ $role->name }}
+                                    </label>
+                                    @endforeach
+                                    {!! Form::submit('Asignar rol', ['class'=>'btn btn-primary mt-2']) !!}
+                                    {!! Form::close() !!}
+                                <td>
+                                    <a class="btn btn-primary" href="#">Editar Rol</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+        </div>
+        @endcan
 
     </div>
     <!-- pie de pagina -->

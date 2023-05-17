@@ -18,7 +18,8 @@ class RolTableSeeder extends Seeder
         Permission::create(['name' => 'artistas'])->syncRoles([$role2]);
         Permission::create(['name' => 'albumes'])->syncRoles([$role2]);
 
-        Permission::create(['name' => 'roles'])->syncRoles([$role1]);
+        Permission::create(['name' => 'administrador'])->syncRoles([$role1]);
+        Permission::create(['name' => 'cliente'])->syncRoles([$role2]);
 
 
     }

@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class AllUserController extends Controller
 {
     public function index()
     {
         $users = User::all();
-        return view('AllUser', compact('users'));
+        $roles = Role::all();
+        return view('AllUser', compact('users', 'roles'));
     }
 
     public function create()
@@ -33,9 +35,11 @@ class AllUserController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        //
+        $user = User::find($user);
+        $user->roles()->sync($request->roles);
+        return redirect()->route('AllUser.index');
     }
 
     public function destroy($id)

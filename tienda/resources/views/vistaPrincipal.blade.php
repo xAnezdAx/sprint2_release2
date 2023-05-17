@@ -24,7 +24,6 @@
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -114,11 +113,19 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center my-3">
-                                <a href="#" class="btn btn-primary mx-2">Agregar a favoritos</a>
-                                <a href="#" class="btn btn-primary mx-2">Agregar al carrito</a>
-                                <a href="#" class="btn btn-primary mx-2">Comprar</a>
+                                @can('administrador')
+                                <a href="{{route('albumesAdmin.edit', $randomAlbum->id)}}" class="btn btn-primary">Editar</a>
+                                <form action="{{route('albumesAdmin.destroy', $randomAlbum->id)}}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                                @elsecan('cliente')
+                                <a href="#" class="btn btn-primary">Añadir a favoritos</a>
+                                @else
+                                <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
+                                @endcan
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -142,9 +149,18 @@
                                 <p class="card-text">Artista: {{$albume->nombre}}</p>
                                 <p class="card-text">Precio: {{$albume->precio}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="btn btn-primary btn-sm mx-1">Agregar a favoritos</a>
-                                    <a href="#" class="btn btn-primary btn-sm mx-1">Agregar al carrito</a>
-                                    <a href="#" class="btn btn-primary btn-sm mx-1">Comprar</a>
+                                    @can('administrador')
+                                    <a href="{{route('albumesAdmin.edit', $albume->id)}}" class="btn btn-primary">Editar</a>
+                                    <form action="{{route('albumesAdmin.destroy', $albume->id)}}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                    @elsecan('cliente')
+                                    <a href="#" class="btn btn-primary">Añadir a favoritos</a>
+                                    @else
+                                    <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
+                                    @endcan
                                 </div>
                             </div>
 

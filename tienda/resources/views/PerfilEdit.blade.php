@@ -15,14 +15,16 @@
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -54,55 +56,58 @@
         </div>
     </section>
 
-    <div class="container mt-5 ">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <form method="POST" action="{{ route('perfil.update', $usuario->id) }}" class="p-4 bg-light rounded shadow">
-                    @csrf
-                    @method('PUT')
 
-                    <div class="form-group">
-                        <label for="name">{{ __('Nombre') }}</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', auth()->user()->name) }}" required autocomplete="name" autofocus>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+    @can('administrador')
+    <div class=" my-5 animated-background">
+        <div class="container mt-5 ">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form method="POST" action="{{ route('perfil.update', $usuario->id) }}" class="p-4 bg-light rounded shadow">
+                        @csrf
+                        @method('PUT')
 
-                    <div class="form-group">
-                        <label for="email">{{ __('Correo Electronico') }}</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                        <div class="form-group">
+                            <label for="name">{{ __('Nombre') }}</label>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', auth()->user()->name) }}" required autocomplete="name" autofocus>
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password">{{ __('Contraseña') }}</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                        <div class="form-group">
+                            <label for="email">{{ __('Correo Electronico') }}</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password-confirm">{{ __('Confirmar Contraseña') }}</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                    </div>
+                        <div class="form-group">
+                            <label for="password">{{ __('Contraseña') }}</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">{{ __('Actualizado') }}</button>
-                </form>
+                        <div class="form-group">
+                            <label for="password-confirm">{{ __('Confirmar Contraseña') }}</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">{{ __('Actualizado') }}</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
-
+    @endcan
 
     <!-- pie de pagina -->
     <footer class="section-p1">

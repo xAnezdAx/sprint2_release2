@@ -9,9 +9,13 @@ Route::resource('/inicio', 'App\Http\Controllers\InicioController');
 Route::resource('/artistas', 'App\Http\Controllers\ArtistasController');
 Route::resource('/albumes', 'App\Http\Controllers\AlbumesController');
 
+
+Route::resource('/artistasAdmin', 'App\Http\Controllers\ArtistasAdminController');
+Route::resource('/albumesAdmin', 'App\Http\Controllers\AlbumesAdminController');
+
+
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/artistasAdmin', 'App\Http\Controllers\ArtistasAdminController');
-    Route::resource('/albumesAdmin', 'App\Http\Controllers\AlbumesAdminController');
+
     Route::resource('/perfil', 'App\Http\Controllers\UserController');
     Route::resource('/AllUser', 'App\Http\Controllers\AllUserController');
 });

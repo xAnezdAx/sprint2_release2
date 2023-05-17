@@ -15,17 +15,16 @@
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
-        <input type="text" placeholder="search">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <ul id="search-results"></ul>
+        </div>
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                @can('roles')
-                <li><a href="{{route('AllUser.index')}}"> Administrar </a></li>
-                @endcan
-                <li><a href="ofertas"> Ofertas</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->

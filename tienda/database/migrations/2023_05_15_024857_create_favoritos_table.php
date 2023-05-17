@@ -16,6 +16,7 @@ class CreateFavoritosTable extends Migration
         Schema::create('favoritos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_usuario');
+            $table->string('nombre_lista');
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

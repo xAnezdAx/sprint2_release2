@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Albumes as ModelsAlbumes;
 use Illuminate\Http\Request;
 use App\Models\Artistas;
+use App\Models\Albumes;
 
 class inicioController extends Controller
 {
     public function index()
     {
+        $albu = Albumes::all();
+        return view('vistaPrincipal');
         //pagina principal
         //$albu = Albumes::all();
         /* $albu = Albumes::select('albumes.*', 'artistas.nombre')
@@ -21,7 +24,7 @@ class inicioController extends Controller
 
         $artistas = Artistas::all();
         return view('vistaPrincipal', compact('albu', 'artistas')); */
-        return view('vistaPrincipal');
+        
         //$albu = ModelsAlbumes::select('albumes.*', 'artistas.nombre')
         //   ->join('artistas', 'albumes.id_artista', '=', 'artistas.id')->get();
         //return view('vistaPrincipal', ['albu' => json_encode($albu)]);

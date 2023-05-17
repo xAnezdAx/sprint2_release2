@@ -163,7 +163,7 @@
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
                                     @elsecan('cliente')
-                                    <a href="#" class="btn btn-primary">Añadir a favoritos</a>
+                                    <a href="{{route('favoritos.edit', $albume->id)}}" class="btn btn-primary">Añadir a favoritos</a>
                                     @else
                                     <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
                                     @endcan

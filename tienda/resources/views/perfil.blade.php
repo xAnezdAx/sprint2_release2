@@ -29,10 +29,6 @@
                 <li><a href="{{route('AllUser.index')}}"> Administrar </a></li>
                 @elsecan('cliente')
                 <li><a href="{{route('favoritos.index')}}"> Mis favoritos </a></li>
-<<<<<<< Updated upstream
-=======
-                
->>>>>>> Stashed changes
                 @endcan
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>

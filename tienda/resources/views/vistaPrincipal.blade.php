@@ -66,22 +66,23 @@
             <div class="row">
                 <!-- Columna izquierda -->
                 <div class="col-md-3">
+
                     <div class="row my-4">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action list-group-item-dark">Artistas
-                                favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Artistas favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Artistas favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Artistas favoritos</a>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action list-group-item-dark">Albumes
-                                favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Albumes favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Albumes favoritos</a>
-                            <a href="#" class="list-group-item list-group-item-action">Albumes favoritos</a>
+                            @foreach ($favoritos as $favo)
+                            <a href="{{ route('favoritos.index') }}" class="list-group-item list-group-item-action list-group-item-dark">{{ $favo->nombre_lista }}</a>
+
+                            @foreach ($lista_favoritos as $lista)
+                            @if ($lista->id_favoritos == $favo->id)
+                            @foreach ($albumes as $album)
+                            @if ($album->id == $lista->id_album)
+                            <a href="{{ route('favoritos.index') }}" class="list-group-item list-group-item-action">{{ $album->titulo }}</a>
+                            @endif
+                            @endforeach
+                            @endif
+                            @endforeach
+
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -121,7 +122,7 @@
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                                 @elsecan('cliente')
-                                <a href="#" class="btn btn-primary">Añadir a favoritos</a>
+                                <a href="{{route('favoritos.edit', $randomAlbum->id)}}" class="btn btn-primary">Añadir a favoritos</a>
                                 @else
                                 <a href="{{route('login')}}" class="btn btn-primary">Añadir a favoritos</a>
                                 @endcan

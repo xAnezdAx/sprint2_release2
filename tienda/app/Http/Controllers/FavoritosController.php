@@ -3,83 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Models\favoritos;
+use App\Models\lista_favoritos;
+use App\Models\albumes;
+use App\Models\artistas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class FavoritosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $variableGlobal;
     public function index()
     {
-        //
+        $favoritos = favoritos::where('id_usuario', Auth::user()->id)->get();
+        $lista_favoritos = lista_favoritos::whereIn('id_favoritos', $favoritos->pluck('id'))->get();
+        $albumes = Albumes::select('albumes.*', 'artistas.nombre')
+            ->join('artistas', 'albumes.id_artista', '=', 'artistas.id')
+            ->whereIn('albumes.id', $lista_favoritos->pluck('id_album'))
+            ->orderBy('albumes.titulo', 'asc')
+            ->get();
+        $artistas = Artistas::all();
+        return view('favoritos', compact('favoritos', 'albumes', 'lista_favoritos', 'artistas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $lista = new lista_favoritos();
+        $lista->id_album = 4;
+        $lista->id_favoritos = $request->lista_desplegable;
+        $lista->save();
+        return redirect()->route('inicio.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\favoritos  $favoritos
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(favoritos $favoritos)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\favoritos  $favoritos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(favoritos $favoritos)
+    public function edit($id)
+    {
+        $this->variableGlobal = $id;
+        $albume = Albumes::select('albumes.*', 'artistas.nombre')
+            ->join('artistas', 'albumes.id_artista', '=', 'artistas.id')
+            ->where('albumes.id', $id)
+            ->orderBy('albumes.titulo', 'asc')
+            ->first();
+        $artistas = Artistas::all();
+        $favoritos = favoritos::where('id_usuario', Auth::user()->id)->get();
+
+        return view('favoritosAdicionar', compact('albume', 'artistas', 'favoritos'));
+    }
+
+    public function update(Request $request)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\favoritos  $favoritos
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, favoritos $favoritos)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\favoritos  $favoritos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(favoritos $favoritos)
+    public function destroy($id)
     {
-        //
+
+
+        $lista_favorito = lista_favoritos::find($id);
+        $lista_favorito->delete();
+
+        return redirect()->route('favoritos.index');
     }
 }

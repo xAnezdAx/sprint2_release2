@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\Albumes;
 use App\Models\Artistas;
 
+use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+
 class AlbumesAdminController extends Controller
 {
     public function index()
@@ -23,7 +26,12 @@ class AlbumesAdminController extends Controller
 
     public function create()
     {
-        //
+        $albu = Albumes::select('albumes.*', 'artistas.nombre')
+            ->join('artistas', 'albumes.id_artista', '=', 'artistas.id')
+            ->orderBy('albumes.titulo', 'asc')
+            ->get();
+        $artistas = Artistas::all();
+        $pdf = FacadePdf::loadView('pdf', compact('albu', 'artistas'));
     }
 
     public function store(Request $request)

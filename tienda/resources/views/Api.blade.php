@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
+    <title>Tienda de música en formato físico</title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/EstilosFavoritos.css">
-    <title>favoritos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/estilosVistaPrincipal.css') }}">
 </head>
 
-<body class="animated-background">
-
+<body>
     <!-- Barra de navegación -->
     <section id="header">
         <a href="{{route('inicio.index')}}"><img src="{{ asset('imagenes/logo001.jpg') }}" class="logo" alt=""></a>
@@ -26,7 +25,6 @@
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
-                <li><a href="{{route('pdf')}}"> Imprimir</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -63,69 +61,16 @@
         </div>
     </section>
 
-    <!-- Contenido -->
-    <div class=" my-5 animated-background">
-        <div class="container m-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <ul class="list-group animated-background">
-                        @foreach ($favoritos as $favo)
-                        <li class="list-group-item animated-background">
-                            <h5>{{ $favo->nombre_lista }}</h5>
-                            
-                            <form action="{{ route('destroyList', $favo->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-primary btn-sm">Eliminar lista</button>
-                            </form>
+    <!-- Header de la página -->
 
-                            <ul>
-                                @foreach ($lista_favoritos as $lista)
-                                @if ($lista->id_favoritos == $favo->id)
-                                @foreach ($albumes as $album)
-                                @if ($album->id == $lista->id_album)
-                                <li>
-                                    <strong>Titulo:</strong> {{ $album->titulo }}<br>
-                                    <strong>Descripción:</strong> {{ $album->descripcion }}<br>
-                                    <strong>Artista:</strong> {{ $album->nombre }}<br>
-                                    <strong>Precio:</strong> {{ $album->precio }} <br>
-                                    <form action="{{ route('favoritos.destroy', $lista->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                    </form>
-                                </li>
-                                @endif
-                                @endforeach
-                                @endif
-                                @endforeach
-                            </ul>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="col-md-4">
+        <!-- Contenido de la página -->
+        <canvas id="album-chart" width="400" height="200"></canvas>
+        
 
-                    <form action="{{ route('storeList') }}" method="POST" class="p-4 bg-light rounded shadow">
-                        @csrf
-                        <div class="form-group">
-                            <label for="titulo">Nombre de la lista</label>
-                            <input type="text" name="nombre_lista" id="nombre_lista" class="form-control">
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary mt-4">Crear</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- pie de pagina -->
+    <!-- Pie de página -->
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src=" {{ asset('imagenes/logo001.jpg') }} " alt="">
+            <img class="logo" src="../imagenes/logo001.jpg" alt="">
             <h4><strong>Contactanos</strong> </h4>
             <p><strong> Direccion</strong> Calle</p>
             <p><strong> Telefono</strong> 320</p>
@@ -153,20 +98,16 @@
         </div>
         <div class="col install">
             <p>Medios de pago seguros</p>
-            <img src=" {{ asset('imagenes/tarjetass.png')}}" alt="">
+            <img src="../imagenes/tarjetass.png" alt="">
         </div>
         <div class="copy">
             <p>Copyrigth</p>
         </div>
     </footer>
-</body>
-
-<script src="{{ asset('javaScript/jquery.min.js') }}"></script>
-<script src="{{ asset('javaScript/scriptFavoritos.js') }}"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
-
-
+    <script src="{{ asset('javaScript/grafico.js') }}"> </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
 </body>
 
 </html>

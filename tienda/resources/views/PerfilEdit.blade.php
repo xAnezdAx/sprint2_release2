@@ -61,8 +61,6 @@
         </div>
     </section>
 
-
-    @can('administrador')
     <div class=" my-5 animated-background">
         <div class="container mt-5 ">
             <div class="row justify-content-center">
@@ -70,7 +68,6 @@
                     <form method="POST" action="{{ route('perfil.update', $usuario->id) }}" class="p-4 bg-light rounded shadow">
                         @csrf
                         @method('PUT')
-
                         <div class="form-group">
                             <label for="name">{{ __('Nombre') }}</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', auth()->user()->name) }}" required autocomplete="name" autofocus>
@@ -112,7 +109,7 @@
             </div>
         </div>
     </div>
-    @endcan
+    
 
     <!-- pie de pagina -->
     <footer class="section-p1">
@@ -145,7 +142,7 @@
         </div>
         <div class="col install">
             <p>Medios de pago seguros</p>
-            <img src=" {{ asset('imagenes/tarjetass.png')}}" alt="">
+            <img src="{{asset('imagenes/tarjetass.png')}}" alt="">
         </div>
         <div class="copy">
             <p>Copyrigth</p>

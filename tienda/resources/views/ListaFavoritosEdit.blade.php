@@ -61,55 +61,29 @@
         </div>
     </section>
 
+    <!-- contenido -->
     <div class=" my-5 animated-background">
-        <div class="container mt-5 ">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form method="POST" action="{{ route('perfil.update', $usuario->id) }}" class="p-4 bg-light rounded shadow">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="name">{{ __('Nombre') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', auth()->user()->name) }}" required autocomplete="name" autofocus>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">{{ __('Correo Electronico') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">{{ __('Contraseña') }}</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm">{{ __('Confirmar Contraseña') }}</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">{{ __('Actualizado') }}</button>
-                    </form>
-                </div>
-            </div>
+        <div class="container mt-5">
+            <ul class="list-group animated-background">
+                <li class="list-group-item animated-background">
+                    <h5>{{ $favo->nombre_lista }}</h5>
+                    <ul>
+                        <li>
+                            <strong>Titulo:</strong> {{ $album->titulo }}<br>
+                            <strong>Descripción:</strong> {{ $album->descripcion }}<br>
+                            <strong>Artista:</strong> {{ $album->nombre }}<br>
+                            <strong>Precio:</strong> {{ $album->precio }} <br>
+                            <form action="{{ route('favoritos.destroy', $lista->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-    
 
     <!-- pie de pagina -->
     <footer class="section-p1">

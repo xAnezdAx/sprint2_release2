@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
+    <title>Tienda de música en formato físico</title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ asset('css/EstilosPerfil.css') }}">
-    <title>Perfil</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/estilosVistaPrincipal.css') }}">
 </head>
 
 <body>
@@ -36,9 +36,9 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         @can('administrador')
-                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>
                         @elsecan('cliente')
-                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>
                         @endcan
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -61,60 +61,16 @@
         </div>
     </section>
 
-    <div class=" my-5 animated-background">
-        <div class="container mt-5 ">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form method="POST" action="{{ route('perfil.update', $usuario->id) }}" class="p-4 bg-light rounded shadow">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="name">{{ __('Nombre') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', auth()->user()->name) }}" required autocomplete="name" autofocus>
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+    <!-- Header de la página -->
 
-                        <div class="form-group">
-                            <label for="email">{{ __('Correo Electronico') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+        <!-- Contenido de la página -->
+        <canvas id="album-chart" width="400" height="200"></canvas>
+        
 
-                        <div class="form-group">
-                            <label for="password">{{ __('Contraseña') }}</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm">{{ __('Confirmar Contraseña') }}</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">{{ __('Actualizado') }}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <!-- pie de pagina -->
+    <!-- Pie de página -->
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src=" {{ asset('imagenes/logo001.jpg') }} " alt="">
+            <img class="logo" src="../imagenes/logo001.jpg" alt="">
             <h4><strong>Contactanos</strong> </h4>
             <p><strong> Direccion</strong> Calle</p>
             <p><strong> Telefono</strong> 320</p>
@@ -142,16 +98,16 @@
         </div>
         <div class="col install">
             <p>Medios de pago seguros</p>
-            <img src="{{asset('imagenes/tarjetass.png')}}" alt="">
+            <img src="../imagenes/tarjetass.png" alt="">
         </div>
         <div class="copy">
             <p>Copyrigth</p>
         </div>
     </footer>
-
+    <script src="{{ asset('javaScript/grafico.js') }}"> </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
 </body>
-<script src="{{ asset('javaScript/scriptPerfil.js') }}"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/7b319a5c76.js" crossorigin="anonymous"></script>
 
 </html>

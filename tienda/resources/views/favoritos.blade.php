@@ -26,6 +26,7 @@
                 <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
                 <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
                 <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
+                <li><a href="{{route('pdf')}}"> Imprimir</a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->
@@ -37,9 +38,9 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('perfil.index')}}">Perfil</a>
                         @can('administrador')
-                        <a href="{{route('AllUser.index')}}"> Administrar </a>    
+                        <a href="{{route('AllUser.index')}}"> Administrar </a>
                         @elsecan('cliente')
-                        <a href="{{route('favoritos.index')}}"> favoritos </a>    
+                        <a href="{{route('favoritos.index')}}"> favoritos </a>
                         @endcan
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -62,38 +63,80 @@
         </div>
     </section>
 
+    <!-- Contenido -->
     <div class=" my-5 animated-background">
-        <div class="container mt-5">
-            <ul class="list-group animated-background">
-                @foreach ($favoritos as $favo)
-                <li class="list-group-item animated-background">
-                    <h5>{{ $favo->nombre_lista }}</h5>
-                    <ul>
-                        @foreach ($lista_favoritos as $lista)
-                        @if ($lista->id_favoritos == $favo->id)
-                        @foreach ($albumes as $album)
-                        @if ($album->id == $lista->id_album)
-                        <li>
-                            <strong>Titulo:</strong> {{ $album->titulo }}<br>
-                            <strong>Descripción:</strong> {{ $album->descripcion }}<br>
-                            <strong>Artista:</strong> {{ $album->nombre }}<br>
-                            <strong>Precio:</strong> {{ $album->precio }} <br>
-                            <form action="{{ route('favoritos.destroy', $lista->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                            </form>
-
-
+        <div class="container m-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-group animated-background">
+                        @foreach ($favoritos as $favo)
+                        <li class="list-group-item animated-background">
+                            <h5>{{ $favo->nombre_lista }}</h5>
+                            <ul>
+                                @foreach ($lista_favoritos as $lista)
+                                @if ($lista->id_favoritos == $favo->id)
+                                @foreach ($albumes as $album)
+                                @if ($album->id == $lista->id_album)
+                                <li>
+                                    <strong>Titulo:</strong> {{ $album->titulo }}<br>
+                                    <strong>Descripción:</strong> {{ $album->descripcion }}<br>
+                                    <strong>Artista:</strong> {{ $album->nombre }}<br>
+                                    <strong>Precio:</strong> {{ $album->precio }} <br>
+                                    <form action="{{ route('favoritos.destroy', $lista->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </li>
+                                @endif
+                                @endforeach
+                                @endif
+                                @endforeach
+                            </ul>
                         </li>
-                        @endif
-                        @endforeach
-                        @endif
                         @endforeach
                     </ul>
-                </li>
-                @endforeach
-            </ul>
+                </div>
+                <div class="col-md-4">
+
+                    <form action="{{ route('favoritos.update', $album->id) }}" method="POST" onsubmit="return validateForm();" class="p-4 bg-light rounded shadow">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="id_artista">Artista</label>
+                            <select name="id_artista" id="id_artista" class="form-control">
+                                @foreach($artistas as $artista)
+                                <option value="{{ $artista->id }}">{{ $artista->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" name="titulo" id="titulo" class="form-control" value="{{ $album->titulo }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="text" name="precio" id="precio" class="form-control" value="{{ $album->precio }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <div class="custom-file">
+                                <input type="file" name="foto" id="foto" class="custom-file-input" accept="image/*">
+                                <label class="custom-file-label" for="foto">Seleccionar archivo</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <!-- tener cuidado con el id y el name -->
+                            <textarea name="descripcion" id="description" cols="30" rows="5" class="form-control" maxlength="255">{{ $album->descripcion }}</textarea>
+                            <div id="description-counter" class="text-muted mt-2"></div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary mt-4">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

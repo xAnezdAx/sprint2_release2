@@ -21,9 +21,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <div>
             <ul id="navbar">
-                <li><a href="{{route('inicio.index')}}"> Inicio</a></li>
-                <li><a href="{{route('albumesAdmin.index')}}"> Albumes</a></li>
-                <li><a href="{{route('artistasAdmin.index')}}"> Artistas</a></li>
+                <li><a href="{{route('inicio.index')}}"> Inicio </a></li>
+                <li><a href="{{route('albumesAdmin.index')}}"> Albumes </a></li>
+                <li><a href="{{route('artistasAdmin.index')}}"> Artistas </a></li>
+                <li><a href="{{route('inicio.api')}}"> Estadisticas </a></li>
                 <li><a href="help/pqr"> Help/PQR</a></li>
                 <li id="favorito"><a href="favoritos"><i class="fa-solid fa-heart"></i> </a></li>
                 <!-- estado de la autenticacion -->

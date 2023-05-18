@@ -49,7 +49,11 @@ class FavoritosController extends Controller
 
     public function storeList(Request $request)
     {
-        //
+        $favoritos = new favoritos();
+        $favoritos->nombre_lista = $request->nombre_lista;
+        $favoritos->id_usuario = Auth::user()->id;
+        $favoritos->save();
+        return redirect()->route('favoritos.index');
     }
 
     public function store(Request $request)
@@ -90,6 +94,12 @@ class FavoritosController extends Controller
     {
         $lista_favorito = lista_favoritos::find($id);
         $lista_favorito->delete();
+        return redirect()->route('favoritos.index');
+    }
+    public function destroyList($id)
+    {
+        $favoritos = favoritos::find($id);
+        $favoritos->delete();
         return redirect()->route('favoritos.index');
     }
 

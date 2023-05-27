@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade as PDF; //ve tu a saber porque no funciona :'c
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+//use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 use App\Models\favoritos;
 use App\Models\lista_favoritos;
@@ -24,8 +24,8 @@ class FavoritosController extends Controller
             ->orderBy('albumes.titulo', 'asc')
             ->get();
         $artistas = Artistas::all();
-        //$pdf = PDF::loadView('pdf', compact('favoritos', 'albumes', 'lista_favoritos', 'artistas'));
-        $pdf = FacadePdf::loadView('favoritos-pdf', compact('favoritos', 'albumes', 'lista_favoritos', 'artistas'));
+        $pdf = \PDF::loadView('favoritos-pdf', compact('favoritos', 'albumes', 'lista_favoritos', 'artistas'));
+        //$pdf = FacadePdf::loadView('favoritos-pdf', compact('favoritos', 'albumes', 'lista_favoritos', 'artistas'));
         return $pdf->download('favoritos.pdf');
     }
 

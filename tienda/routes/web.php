@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::resource('/artistas', 'App\Http\Controllers\ArtistasController');
-Route::resource('/albumes', 'App\Http\Controllers\AlbumesController');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/inicio/api', 'App\Http\Controllers\InicioController@api')->name('inicio.api');
@@ -13,7 +11,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/favoritos-destroyList/{id}', 'App\Http\Controllers\FavoritosController@destroyList')->name('destroyList');
 
 
-    Route::resource('/artistasAdmin', 'App\Http\Controllers\ArtistasAdminController');
+    Route::resource('/artistasAdmin', 'App\Http\Controllers\ArtistasAdminController');    
     Route::resource('/albumesAdmin', 'App\Http\Controllers\AlbumesAdminController');
     Route::resource('/perfil', 'App\Http\Controllers\UserController');
     Route::resource('/AllUser', 'App\Http\Controllers\AllUserController');
